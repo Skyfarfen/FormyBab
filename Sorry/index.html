@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A Letter For You 💗</title>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@300;400;500;600&family=Parisienne&display=swap');
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(255, 182, 213, .35), transparent 30%),
+        radial-gradient(circle at 80% 70%, rgba(255, 128, 183, .22), transparent 35%),
+        linear-gradient(135deg, #fff5f9, #ffe5ef 45%, #fff8fb);
+      color: #4b2636;
+      font-family: "Inter", sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* Floating hearts */
+    .hearts {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .heart {
+      position: absolute;
+      bottom: -50px;
+      color: rgba(255, 105, 160, .25);
+      font-size: 18px;
+      animation: floatUp linear infinite;
+    }
+
+    .heart:nth-child(1) { left: 8%; animation-duration: 12s; }
+    .heart:nth-child(2) { left: 20%; animation-duration: 16s; animation-delay: 3s; }
+    .heart:nth-child(3) { left: 35%; animation-duration: 13s; animation-delay: 5s; }
+    .heart:nth-child(4) { left: 52%; animation-duration: 18s; animation-delay: 1s; }
+    .heart:nth-child(5) { left: 70%; animation-duration: 14s; animation-delay: 6s; }
+    .heart:nth-child(6) { left: 86%; animation-duration: 17s; animation-delay: 2s; }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+      }
+      15% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-115vh) rotate(25deg);
+        opacity: 0;
+      }
+    }
+
+    /* Opening */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 30px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-card {
+      max-width: 750px;
+      padding: 60px 35px;
+    }
+
+    .tiny {
+      text-transform: uppercase;
+      letter-spacing: 5px;
+      font-size: 11px;
+      color: #c85b86;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      font-family: "Parisienne", cursive;
+      font-size: clamp(65px, 12vw, 120px);
+      font-weight: 400;
+      color: #d94f83;
+      line-height: .9;
+      margin-bottom: 30px;
+      text-shadow: 0 8px 25px rgba(217, 79, 131, .15);
+    }
+
+    .hero p {
+      max-width: 500px;
+      margin: auto;
+      font-size: 16px;
+      line-height: 1.8;
+      color: #765466;
+      font-weight: 300;
+    }
+
+    .open-btn {
+      display: inline-block;
+      margin-top: 40px;
+      padding: 15px 32px;
+      border-radius: 100px;
+      background: #df5b8b;
+      color: white;
+      text-decoration: none;
+      font-size: 14px;
+      letter-spacing: 1px;
+      box-shadow: 0 12px 30px rgba(223, 91, 139, .25);
+      transition: .3s ease;
+    }
+
+    .open-btn:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 35px rgba(223, 91, 139, .35);
+    }
+
+    /* Letter */
+    .letter {
+      position: relative;
+      z-index: 1;
+      width: min(900px, calc(100% - 30px));
+      margin: 0 auto 160px;
+    }
+
+    .letter-paper {
+      background: rgba(255, 255, 255, .72);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(255, 255, 255, .9);
+      border-radius: 30px;
+      padding: clamp(30px, 7vw, 75px);
+      box-shadow:
+        0 30px 80px rgba(168, 75, 108, .12),
+        inset 0 1px rgba(255,255,255,.8);
+    }
+
+    .greeting {
+      font-family: "DM Serif Display", serif;
+      font-size: 32px;
+      color: #c94d7c;
+      margin-bottom: 50px;
+    }
+
+    .section {
+      margin-bottom: 75px;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity .8s ease, transform .8s ease;
+    }
+
+    .section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .number {
+      color: #e26391;
+      font-size: 12px;
+      letter-spacing: 3px;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .section h2 {
+      font-family: "DM Serif Display", serif;
+      font-size: clamp(28px, 5vw, 40px);
+      font-weight: 400;
+      color: #522b3d;
+      margin-bottom: 22px;
+    }
+
+    .section p {
+      font-size: 16px;
+      line-height: 2;
+      color: #765466;
+      font-weight: 300;
+    }
+
+    .divider {
+      width: 50px;
+      height: 2px;
+      background: #e57a9e;
+      margin: 70px auto;
+      border-radius: 5px;
+    }
+
+    /* Ending */
+    .ending {
+      text-align: center;
+      padding: 30px 0 30px;
+    }
+
+    .ending .small {
+      font-size: 13px;
+      letter-spacing: 2px;
+      color: #a66a80;
+      margin-bottom: 25px;
+    }
+
+    .ending h2 {
+      font-family: "Parisienne", cursive;
+      font-size: clamp(60px, 10vw, 90px);
+      font-weight: 400;
+      color: #d94f83;
+      margin-bottom: 20px;
+    }
+
+    .ending p {
+      color: #765466;
+      line-height: 1.8;
+    }
+
+    .signature {
+      font-family: "Parisienne", cursive;
+      font-size: 35px;
+      color: #b84c76;
+      margin-top: 30px;
+    }
+
+    /* Music Player */
+    .music-player {
+      position: fixed;
+      z-index: 10;
+      left: 50%;
+      bottom: 22px;
+      transform: translateX(-50%);
+      width: min(470px, calc(100% - 30px));
+      background: rgba(255, 245, 249, .88);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,.8);
+      border-radius: 100px;
+      padding: 10px 15px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 15px 40px rgba(150, 61, 94, .18);
+    }
+
+    .play {
+      width: 42px;
+      height: 42px;
+      border: none;
+      border-radius: 50%;
+      background: #df5b8b;
+      color: white;
+      cursor: pointer;
+      font-size: 16px;
+      flex-shrink: 0;
+      transition: .2s;
+    }
+
+    .play:hover {
+      transform: scale(1.08);
+    }
+
+    .song-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .song-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: #603246;
+    }
+
+    .song-subtitle {
+      font-size: 11px;
+      color: #a06b81;
+      margin-top: 3px;
+    }
+
+    .music-icon {
+      color: #df5b8b;
+      font-size: 17px;
+    }
+
+    /* Mobile */
+    @media (max-width: 600px) {
+      .hero-card {
+        padding: 30px 15px;
+      }
+
+      .hero p {
+        font-size: 14px;
+      }
+
+      .letter {
+        width: calc(100% - 20px);
+      }
+
+      .letter-paper {
+        border-radius: 22px;
+        padding: 35px 25px;
+      }
+
+      .section {
+        margin-bottom: 55px;
+      }
+
+      .section p {
+        font-size: 15px;
+        line-height: 1.9;
+      }
+
+      .greeting {
+        font-size: 27px;
+      }
+
+      .music-player {
+        bottom: 12px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Floating hearts -->
+  <div class="hearts">
+    <div class="heart">♡</div>
+    <div class="heart">♡</div>
+    <div class="heart">♡</div>
+    <div class="heart">♡</div>
+    <div class="heart">♡</div>
+    <div class="heart">♡</div>
+  </div>
+
+  <!-- Opening -->
+  <section class="hero">
+    <div class="hero-card">
+      <div class="tiny">A little something for you</div>
+
+      <h1>My Bab</h1>
+
+      <p>
+        I've made a lot of mistakes, and I wanna make things right so please spare me your time 🙏
+      </p>
+
+      <a href="#letter" class="open-btn">
+        Read my letter ↓
+      </a>
+    </div>
+  </section>
+
+
+  <!-- Letter -->
+  <main class="letter" id="letter">
+    <div class="letter-paper">
+
+      <div class="greeting">
+        Dear Twin,
+      </div>
+
+
+      <!-- 1 -->
+      <section class="section">
+        <h2>What I Did</h2>
+
+        <p>
+          I did so many things that made u felt betrayed and hurt, like how i said i would make it up to u but then i forgot the next day.
+          Last saturday when ROTC was finished and we were discussing where to eat, and you grew impatient so you left and went near flynn to eat.
+          After we finished discussing I forgot about you, and continued on until you left where i remembered what you said T_T. Lastly today
+          where you texted me and i misunderstood, also did not clarify so you waited for nothing.
+        </p>
+      </section>
+
+
+      <!-- 2 -->
+      <section class="section">
+        <h2>Why I'm Sorry</h2>
+
+        <p>
+          I'm sorry po twin kasi medyo masakit yung ginagawa ko, labi na pag sinabi mo sakin na mabigat yung puso mo at galit sa amin.
+          Hinde ko gusto na madamay yung ibang tao dahil sa ginagawa ko, and my heart also aches whenever someone hates me 😔 whether
+          it be my family, S.O, my friends, and especially my CoF.
+        </p>
+      </section>
+
+
+      <!-- 3 -->
+      <section class="section">
+        <h2>What I Should Have Done</h2>
+
+        <p>
+          Honestly, I had a lot of other opportunities to do what i would have done but i didn't because its either I forgot
+          or I simply didn't know but im not gonna blame it on those two things instead I'll take my fault and learn from it.
+        </p>
+      </section>
+
+
+      <!-- 4 -->
+      <section class="section">
+        <h2>What I'll Do Differently</h2>
+
+        <p>
+          Even though i have made this effort just to apologize I dont expect you to magically forgive me because
+          apologies dont work like that and it takes time to forgive one another. So next time I'll try my best to
+          clear any miscommunication and hopefully wont forget as easily as before especially when it's about you,
+          and the others.
+        </p>
+      </section>
+
+      <!-- Ending -->
+      <section class="ending">
+        <div class="small">Thank you for reading this.</div>
+
+        <h2>I'm Sorry po Bab.</h2>
+
+        <p>
+          I don't expect anything from you.<br>
+          But tomorrow i'll bring you smth ^_^
+        </p>
+
+        <div class="signature">
+          — Your dear Sean, Twin, Bab
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+
+  <!-- Music Player -->
+  <div class="music-player">
+
+    <button class="play" id="playButton">▶</button>
+
+    <div class="music-icon">♫</div>
+
+    <div class="song-info">
+      <div class="song-title">A song for you</div>
+      <div class="song-subtitle">Play this while you read</div>
+    </div>
+
+  </div>
+
+
+  <!-- Replace "your-song.mp3" with your music file -->
+  <audio id="music" loop>
+    <source src="Sorry_na.mp3" type="audio/mpeg">
+  </audio>
+
+
+  <script>
+
+    /* Music */
+    const music = document.getElementById("music");
+    const playButton = document.getElementById("playButton");
+
+    playButton.addEventListener("click", () => {
+
+      if (music.paused) {
+        music.play();
+        playButton.textContent = "❚❚";
+      } else {
+        music.pause();
+        playButton.textContent = "▶";
+      }
+
+    });
+
+
+    /* Reveal sections while scrolling */
+    const sections = document.querySelectorAll(".section");
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+          }
+        });
+      },
+      {
+        threshold: 0.15
+      }
+    );
+
+    sections.forEach(section => {
+      observer.observe(section);
+    });
+
+  </script>
+
+</body>
+</html>
